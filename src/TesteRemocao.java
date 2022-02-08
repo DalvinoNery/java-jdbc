@@ -7,7 +7,7 @@ public class TesteRemocao {
 
         Connection connection = connectionFactory.recuperaConexao();
         PreparedStatement pstm = connection.prepareStatement("DELETE FROM produto WHERE id > ? ");
-        pstm.setInt(1, 9);
+        pstm.setInt(1, 13);
         pstm.execute();
         Integer linhasModificada = pstm.getUpdateCount();
 
