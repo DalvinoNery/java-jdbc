@@ -1,5 +1,6 @@
 package dao;
 
+import modelo.Categoria;
 import modelo.Produto;
 
 import java.sql.*;
@@ -36,6 +37,22 @@ public class ProdutoDAO {
         List<Produto> listaProdutos = new ArrayList<>();
         String sql = "SELECT ID, NOME, DESCRICAO FROM produto";
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.execute();
+            try (ResultSet rst = pstm.getResultSet()) {
+                while (rst.next()) {
+                    Produto produto = new Produto(rst.getInt(1), rst.getString(2), rst.getString(3));
+                    listaProdutos.add(produto);
+                }
+            }
+        }
+        return listaProdutos;
+    }
+
+    public List<Produto> listarPorCategoria(Categoria categoria) throws SQLException {
+        List<Produto> listaProdutos = new ArrayList<>();
+        String sql = "SELECT ID, NOME, DESCRICAO FROM produto WHERE ?";
+        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setInt(1,categoria.getId());
             pstm.execute();
             try (ResultSet rst = pstm.getResultSet()) {
                 while (rst.next()) {
