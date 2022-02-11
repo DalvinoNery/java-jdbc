@@ -15,19 +15,23 @@ public class CategoriaDAO {
         this.connection = connection;
     }
 
-    public List<Categoria> listar() throws SQLException {
-        List<Categoria> listaCategoria = new ArrayList<>();
-        String sql = "SELECT ID, NOME FROM CATEGORIA";
-        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-            pstm.execute();
-            try (ResultSet rst = pstm.getResultSet()) {
-                while (rst.next()) {
-                    Categoria categoria = new Categoria(rst.getInt(1), rst.getString(2));
-                    listaCategoria.add(categoria);
+    public List<Categoria> listar(){
+        try {
+            List<Categoria> listaCategoria = new ArrayList<>();
+            String sql = "SELECT ID, NOME FROM CATEGORIA";
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.execute();
+                try (ResultSet rst = pstm.getResultSet()) {
+                    while (rst.next()) {
+                        Categoria categoria = new Categoria(rst.getInt(1), rst.getString(2));
+                        listaCategoria.add(categoria);
+                    }
                 }
             }
+            return listaCategoria;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return listaCategoria;
     }
 
     public List<Categoria> listarComProduto() throws SQLException {

@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Categoria {
 
@@ -34,9 +33,6 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return this.nome;
     }
 }
