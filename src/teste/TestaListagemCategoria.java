@@ -1,5 +1,7 @@
+package teste;
+
 import dao.CategoriaDAO;
-import dao.ProdutoDAO;
+import factory.ConnectionFactory;
 import modelo.Categoria;
 import modelo.Produto;
 
